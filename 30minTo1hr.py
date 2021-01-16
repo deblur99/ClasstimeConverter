@@ -29,6 +29,10 @@ def getTimeArray():
             string = input('').split(' ')
             day, getTime = string[0], string[1:3]
 
+            if len(getTime) < 2 or getTime[0] > getTime[-1]:
+                print('잘못된 입력입니다. 다시 시도하세요.')
+                continue
+
             for i in range(2): getTime[i] = int(getTime[i])
 
             if len(getTime) == 2:
@@ -95,11 +99,10 @@ def calcTime(getTime):
     return result
 
 def printConvertedTime(result):
+
     for key in result.keys():
         hour = result[key][0]
         minute = result[key][1]
-
-        print(day, end=' ')
 
         if (hour // 10) < 1:
             if minute >= 10:
