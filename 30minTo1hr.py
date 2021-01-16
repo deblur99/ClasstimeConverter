@@ -3,6 +3,8 @@
 1~24의 숫자 2개를 입력받고 09시~24시의 시간으로 변환하여 반환 후 출력
 '''
 
+day = ''
+
 def getControlFlag():
     while True:
         print('1: 변환하기')
@@ -20,10 +22,13 @@ def getControlFlag():
             print('올바른 값을 입력하세요.')
     
 def getTimeArray():
-    print('시간을 입력하세요.\n입력 예시) 12 14')
+    print('요일과 시간을 입력하세요.\n입력 예시) 목 12 14')
     while True:
-        try:    
-            getTime = input('').split(' ')
+        try:
+            global day
+            string = input('').split(' ')
+            day, getTime = string[0], string[1:3]
+
             for i in range(2): getTime[i] = int(getTime[i])
 
             if len(getTime) == 2:
@@ -93,6 +98,8 @@ def printConvertedTime(result):
     for key in result.keys():
         hour = result[key][0]
         minute = result[key][1]
+
+        print(day, end=' ')
 
         if (hour // 10) < 1:
             if minute >= 10:
