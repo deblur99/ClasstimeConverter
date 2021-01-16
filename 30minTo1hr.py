@@ -4,6 +4,7 @@
 '''
 
 day = ''
+place = ''
 
 def getControlFlag():
     while True:
@@ -22,12 +23,13 @@ def getControlFlag():
             print('올바른 값을 입력하세요.')
     
 def getTimeArray():
-    print('요일과 시간을 입력하세요.\n입력 예시) 목 12 14')
+    print('요일과 시간, 강의장소를 입력하세요.\n입력 예시) 목 12 14 국제210 국제608')
     while True:
         try:
             global day
+            global place
             string = input('').split(' ')
-            day, getTime = string[0], string[1:3]
+            day, getTime, place = string[0], string[1:3], string[3:]
 
             if len(getTime) < 2 or getTime[0] > getTime[-1]:
                 print('잘못된 입력입니다. 다시 시도하세요.')
