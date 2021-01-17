@@ -5,30 +5,20 @@
 
 day = ''
 place = ''
+quit_condition = [['q'], ['그만']]
 
-def getControlFlag():
-    while True:
-        print('1: 변환하기')
-        print('2: 나가기')
-
-        try:
-            decision = int(input())
-
-            if decision == 1:
-               return True 
-            else:
-               return False
-
-        except ValueError:
-            print('올바른 값을 입력하세요.')
-    
 def getTimeArray():
-    print('요일과 시간, 강의장소를 입력하세요.\n입력 예시) 목 12 14 국제210 국제608')
+    
     while True:
+        global day
+        global place
+
+        string = input('').split(' ')
+
+        if string in quit_condition:
+            return None
+
         try:
-            global day
-            global place
-            string = input('').split(' ')
             day, getTime, place = string[0], string[1:3], string[3:]
 
             if len(getTime) < 2 or getTime[0] > getTime[-1]:
@@ -118,9 +108,15 @@ def printConvertedTime(result):
                 print(f'{key}: {hour}:0{minute}')
 
 def main():
-    while (getControlFlag()):
+    print('요일과 시간, 강의장소를 입력하세요.\n입력 예시) 목 12 14 국제210 국제608')
+    print('사용이 끝났으면 \'q\' 혹은 \'그만\'을 입력하세요. (\'\' 기호 없이 입력)')
+
+    while True:
         getTime = getTimeArray()
-        result = calcTime(getTime)
-        printConvertedTime(result)
+        if getTime != None:
+            result = calcTime(getTime)
+            printConvertedTime(result)
+        else:
+            return None
 
 main()
