@@ -21,7 +21,7 @@ def getTimeArray():
         try:
             day, getTime, place = string[0], string[1:3], string[3:]
 
-            if len(getTime) < 2 or getTime[0] > getTime[-1]:
+            if len(getTime) < 2 or int(getTime[0]) > int(getTime[-1]):
                 print('잘못된 입력입니다. 다시 시도하세요.')
                 continue
 
