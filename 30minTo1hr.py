@@ -7,32 +7,37 @@ day = ''
 place = ''
 quit_condition = [['q'], ['그만']]
 
-def getTimeArray():
-    
+def getTimeArray():    
     while True:
         global day
         global place
 
-        string = input('').split(' ')
+        inputted = input('').split(' ')
 
-        if string in quit_condition:
+        if inputted in quit_condition:
             return None
 
         try:
-            day, getTime, place = string[0], string[1:3], string[3:]
+            if len(inputted) == 2:
+                getTime = inputted[0:2]
+            
+            elif len(inputted) == 3:
+                day, getTime = inputted[0], inputted[1:3]
+            
+            elif len(inputted) > 3:
+                day, getTime, place = inputted[0], inputted[1:3], inputted[3:]
 
-            if len(getTime) < 2 or int(getTime[0]) > int(getTime[-1]):
+            getTime = list(map(lambda x: int(x), getTime))
+            print(getTime) # debug
+            
+            # Check exceptions
+            if getTime[0] > getTime[1]:
                 print('잘못된 입력입니다. 다시 시도하세요.')
                 continue
 
-            for i in range(2): getTime[i] = int(getTime[i])
-
-            if len(getTime) == 2:
-                for i in getTime:
-                    if i < 1 or i > 24:
-                        raise ValueError
-            else:
-                raise ValueError
+            for i in getTime:
+                if i < 1 or i > 24:
+                    raise ValueError
         
         except TypeError:
             print('3개 이상의 시간을 입력하셨거나, 입력 예시의 형식과 맞지 않습니다.')
@@ -108,7 +113,8 @@ def printConvertedTime(result):
                 print(f'{key}: {hour}:0{minute}')
 
 def main():
-    print('요일과 시간, 강의장소를 입력하세요.\n입력 예시) 목 12 14 국제210 국제608')
+    print('시간 / 요일 시간 / 요일 시간 강의장소를 입력하세요.')
+    print('입력 예시) 12 14 / 목 12 14 / 목 12 14 국제210 국제608')
     print('사용이 끝났으면 \'q\' 혹은 \'그만\'을 입력하세요. (\'\' 기호 없이 입력)')
 
     while True:
