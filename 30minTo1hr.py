@@ -28,7 +28,6 @@ def getTimeArray():
                 day, getTime, place = inputted[0], inputted[1:3], inputted[3:]
 
             getTime = list(map(lambda x: int(x), getTime))
-            print(getTime) # debug
             
             # Check exceptions
             if getTime[0] > getTime[1]:
